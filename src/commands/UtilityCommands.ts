@@ -4,18 +4,13 @@ import CommandHandler from "./CommandHandler";
 import { success, error, label, header, divider, info } from "../utils/display";
 import chalk from "chalk";
 
-/**
- * UtilityCommands — general-purpose utilities.
- * Commands: greet, time, uuid, base64, password
- */
+
 class UtilityCommands extends CommandHandler {
     constructor() {
         super("utility", "General-purpose utility commands");
     }
 
-    /**
-     * Generates a random password from a character pool.
-     */
+
     private generatePassword(length: number): string {
         const chars =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}";
@@ -27,13 +22,13 @@ class UtilityCommands extends CommandHandler {
     }
 
     register(program: Command): void {
-        // ── greet <name> [--shout] ──────────────────────────
+
         program
             .command("greet <name>")
             .description("Greet someone by name")
             .option("-s, --shout", "Shout the greeting in uppercase")
             .action((name: string, options: { shout: boolean }) => {
-                header("Greeting 👋");
+                header("Greeting ");
                 let msg = `Hello, ${name}! Welcome to MyCLI. Have a great day!`;
                 if (options.shout) {
                     msg = msg.toUpperCase();
@@ -43,12 +38,12 @@ class UtilityCommands extends CommandHandler {
                 }
             });
 
-        // ── time [timezone] ─────────────────────────────────
+
         program
             .command("time [timezone]")
             .description("Display the current date and time (optionally in a timezone)")
             .action((timezone?: string) => {
-                header("Current Time 🕐");
+                header("Current Time ");
                 const opts: Intl.DateTimeFormatOptions = {
                     weekday: "long",
                     year: "numeric",
@@ -73,13 +68,13 @@ class UtilityCommands extends CommandHandler {
                 success(formatted);
             });
 
-        // ── uuid ────────────────────────────────────────────
+
         program
             .command("uuid")
             .description("Generate a random UUID v4")
             .option("-c, --count <n>", "Generate N UUIDs", "1")
             .action((options: { count: string }) => {
-                header("UUID Generator 🔑");
+                header("UUID Generator ");
                 const n = parseInt(options.count, 10);
                 if (isNaN(n) || n < 1) {
                     error("--count must be a positive integer.");
@@ -90,12 +85,12 @@ class UtilityCommands extends CommandHandler {
                 }
             });
 
-        // ── base64 <encode|decode> <text> ───────────────────
+
         program
             .command("base64 <action> <text>")
             .description("Encode or decode a string in Base64 (action: encode | decode)")
             .action((action: string, text: string) => {
-                header("Base64 Tool 🔐");
+                header("Base64 Tool ");
                 if (action === "encode") {
                     const encoded = Buffer.from(text, "utf-8").toString("base64");
                     label("Input", text);
@@ -113,14 +108,14 @@ class UtilityCommands extends CommandHandler {
                 }
             });
 
-        // ── password [--length <n>] ──────────────────────────
+
         program
             .command("password")
             .description("Generate a cryptographically strong random password")
             .option("-l, --length <n>", "Password length (default: 16)", "16")
             .option("-c, --count <n>", "Number of passwords to generate", "1")
             .action((options: { length: string; count: string }) => {
-                header("Password Generator 🔒");
+                header("Password Generator ");
                 const length = parseInt(options.length, 10);
                 const count = parseInt(options.count, 10);
                 if (isNaN(length) || length < 6) {

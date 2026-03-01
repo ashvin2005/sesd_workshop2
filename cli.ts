@@ -10,7 +10,7 @@ import UtilityCommands from "./src/commands/UtilityCommands";
 
 const program = new Command();
 
-// ── Banner ───────────────────────────────────────────────────────────────────
+
 const banner = boxen(
     chalk.cyanBright.bold("  MyCLI  ") +
     "\n" +
@@ -25,7 +25,7 @@ const banner = boxen(
     }
 );
 
-// ── Program meta ─────────────────────────────────────────────────────────────
+
 program
     .name("mycli")
     .description(
@@ -34,7 +34,7 @@ program
     .version(chalk.greenBright("1.0.0"), "-v, --version", "Display the current version")
     .addHelpText("beforeAll", banner);
 
-// ── Register all command handlers ─────────────────────────────────────────────
+
 const handlers = [
     new MathCommands(),
     new FileCommands(),
@@ -44,5 +44,5 @@ const handlers = [
 
 handlers.forEach((handler) => handler.register(program));
 
-// ── Parse ─────────────────────────────────────────────────────────────────────
+
 program.parse(process.argv);

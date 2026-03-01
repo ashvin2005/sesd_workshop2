@@ -2,10 +2,7 @@ import { Command } from "commander";
 import CommandHandler from "./CommandHandler";
 import { success, error, header } from "../utils/display";
 
-/**
- * MathCommands — handles all arithmetic operations.
- * Commands: add, subtract, multiply, divide, modulo, power, factorial
- */
+
 class MathCommands extends CommandHandler {
     constructor() {
         super("math", "Mathematical computation commands");

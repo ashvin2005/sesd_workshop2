@@ -1,23 +1,23 @@
-# MyCLI 🚀
+# MyCLI
 
 A powerful, fully-featured Command Line Interface tool built with **Node.js** and **TypeScript**, structured using **Object-Oriented Programming** principles.
 
 ---
 
-## ✨ Features
+## Features
 
-- 🏗️ **OOP Architecture** — Abstract base class with 4 command handler subclasses
-- 📟 **17 Commands** across math, file system, APIs, and utilities
-- 🌐 **5 API Integrations** — Joke, Quote, Weather, GitHub, CoinGecko
-- 🎨 **Colored Terminal Output** — via `chalk`
-- ⏳ **Loading Spinners** — via `ora`
-- 📊 **Table Output** — via `cli-table3`
-- ✅ **Input Validation** on every command
-- 🚩 **Flags & Options** (e.g., `--shout`, `--lines`, `--length`, `--all`, `--count`)
+- **OOP Architecture** — Abstract base class with 4 command handler subclasses
+- **17 Commands** across math, file system, APIs, and utilities
+- **5 API Integrations** — Joke, Quote, Weather, GitHub, CoinGecko
+- **Colored Terminal Output** — via `chalk`
+- **Loading Spinners** — via `ora`
+- **Table Output** — via `cli-table3`
+- **Input Validation** on every command
+- **Flags & Options** (e.g., `--shout`, `--lines`, `--length`, `--all`, `--count`)
 
 ---
 
-## 🛠️ Setup
+## Setup
 
 ### Prerequisites
 - Node.js ≥ 18
@@ -26,25 +26,18 @@ A powerful, fully-featured Command Line Interface tool built with **Node.js** an
 ### Installation
 
 ```bash
-# Clone the repository
 git clone <your-repo-url>
 cd workshop_2
-
-# Install dependencies
 npm install
-
-# Build the TypeScript project
 npm run build
-
-# (Optional) Link globally so you can use `mycli` anywhere
 npm link
 ```
 
 ---
 
-## 📖 Available Commands
+## Available Commands
 
-### ➕ Math Commands
+### Math Commands
 
 | Command | Description |
 |---|---|
@@ -56,7 +49,7 @@ npm link
 | `mycli power <base> <exp>` | Raise base to an exponent |
 | `mycli factorial <num>` | Factorial of a non-negative integer |
 
-### 📁 File Commands
+### File Commands
 
 | Command | Description |
 |---|---|
@@ -64,7 +57,7 @@ npm link
 | `mycli readfile <path>` | Print file contents (`--lines <n>` for first N lines) |
 | `mycli listdir [path]` | List directory contents (`--all` to include hidden) |
 
-### 🌐 API Commands
+### API Commands
 
 | Command | Description | API Used |
 |---|---|---|
@@ -74,7 +67,7 @@ npm link
 | `mycli github <username>` | GitHub public profile info | GitHub REST API |
 | `mycli crypto <coin>` | Live crypto price & market data | CoinGecko API |
 
-### 🔧 Utility Commands
+### Utility Commands
 
 | Command | Description |
 |---|---|
@@ -87,37 +80,8 @@ npm link
 
 ---
 
-## 🧪 Example Usage
 
-```bash
-# Math
-node dist/cli.js add 42 58
-node dist/cli.js factorial 10
-node dist/cli.js power 2 10
-
-# File System
-node dist/cli.js fileinfo ./package.json
-node dist/cli.js readfile ./cli.ts --lines 20
-node dist/cli.js listdir ./src --all
-
-# APIs
-node dist/cli.js joke
-node dist/cli.js quote
-node dist/cli.js weather "New York"
-node dist/cli.js github octocat
-node dist/cli.js crypto ethereum
-
-# Utilities
-node dist/cli.js greet Ashvin --shout
-node dist/cli.js time Asia/Kolkata
-node dist/cli.js uuid --count 5
-node dist/cli.js base64 encode "Hello World"
-node dist/cli.js password --length 24 --count 3
-```
-
----
-
-## 🏗️ Project Architecture
+## Project Architecture
 
 ```
 workshop_2/
@@ -145,7 +109,7 @@ workshop_2/
 
 ---
 
-## 🔌 APIs Used
+## APIs Used
 
 | API | Endpoint | Key Required |
 |---|---|---|
@@ -156,7 +120,3 @@ workshop_2/
 | [CoinGecko API](https://www.coingecko.com/en/api) | `/simple/price` | ❌ No |
 
 ---
-
-## 📜 License
-
-MIT © Ashvin

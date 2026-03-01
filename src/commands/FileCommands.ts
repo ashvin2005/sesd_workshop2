@@ -6,17 +6,14 @@ import { success, error, label, header, divider } from "../utils/display";
 import chalk from "chalk";
 const Table = require("cli-table3");
 
-/**
- * FileCommands — file system utilities.
- * Commands: fileinfo, readfile, listdir
- */
+
 class FileCommands extends CommandHandler {
     constructor() {
         super("file", "File system utility commands");
     }
 
     register(program: Command): void {
-        // fileinfo <filepath>
+
         program
             .command("fileinfo <filepath>")
             .description("Display detailed information about a file")
@@ -39,7 +36,7 @@ class FileCommands extends CommandHandler {
                 label("Permissions (mode)", (stats.mode & 0o777).toString(8));
             });
 
-        // readfile <filepath> [--lines <n>]
+
         program
             .command("readfile <filepath>")
             .description("Read and display the contents of a file")
@@ -72,7 +69,7 @@ class FileCommands extends CommandHandler {
                 divider();
             });
 
-        // listdir [dirpath] [--all]
+
         program
             .command("listdir [dirpath]")
             .description("List all files and folders in a directory")

@@ -3,20 +3,17 @@ import axios from "axios";
 import CommandHandler from "./CommandHandler";
 import { success, error, label, header, divider, info } from "../utils/display";
 import chalk from "chalk";
-// ora is a CommonJS module
+
 const ora = require("ora");
 
-/**
- * APICommands — integrates with 5 external APIs.
- * Commands: joke, quote, weather, github, crypto
- */
+
 class APICommands extends CommandHandler {
     constructor() {
         super("api", "Commands powered by external APIs");
     }
 
     register(program: Command): void {
-        // ── 1. JOKE ─────────────────────────────────────────
+
         program
             .command("joke")
             .description("Fetch a random joke (Official Joke API)")
@@ -27,7 +24,7 @@ class APICommands extends CommandHandler {
                         "https://official-joke-api.appspot.com/random_joke"
                     );
                     spinner.stop();
-                    header("Random Joke 😂");
+                    header("Random Joke");
                     console.log(chalk.yellowBright("  Q: ") + chalk.white(res.data.setup));
                     console.log(chalk.greenBright("  A: ") + chalk.white(res.data.punchline));
                 } catch {
@@ -36,7 +33,7 @@ class APICommands extends CommandHandler {
                 }
             });
 
-        // ── 2. QUOTE ────────────────────────────────────────
+
         program
             .command("quote")
             .description("Fetch a random inspirational quote (Quotable API)")
@@ -45,7 +42,7 @@ class APICommands extends CommandHandler {
                 try {
                     const res = await axios.get("https://api.quotable.io/random");
                     spinner.stop();
-                    header("Random Quote 💬");
+                    header("Random Quote");
                     console.log(chalk.white(`  "${res.data.content}"`));
                     console.log(chalk.gray(`  — ${res.data.author}`));
                 } catch {
@@ -54,14 +51,14 @@ class APICommands extends CommandHandler {
                 }
             });
 
-        // ── 3. WEATHER ──────────────────────────────────────
+
         program
             .command("weather <city>")
             .description("Get the current weather for a city (Open-Meteo + Geocoding)")
             .action(async (city: string) => {
                 const spinner = ora(chalk.cyan(`Looking up weather for "${city}"...`)).start();
                 try {
-                    // Step 1: Geocoding
+
                     const geoRes = await axios.get(
                         "https://geocoding-api.open-meteo.com/v1/search",
                         { params: { name: city, count: 1, language: "en", format: "json" } }
@@ -73,7 +70,7 @@ class APICommands extends CommandHandler {
                     }
                     const { latitude, longitude, name, country } = geoRes.data.results[0];
 
-                    // Step 2: Weather
+
                     const weatherRes = await axios.get("https://api.open-meteo.com/v1/forecast", {
                         params: {
                             latitude,
@@ -87,11 +84,11 @@ class APICommands extends CommandHandler {
 
                     const w = weatherRes.data.current_weather;
                     const codeMap: Record<number, string> = {
-                        0: "Clear sky ☀️", 1: "Mainly clear 🌤️", 2: "Partly cloudy ⛅", 3: "Overcast ☁️",
-                        45: "Foggy 🌫️", 48: "Icy fog 🌫️", 51: "Light drizzle 🌦️", 53: "Drizzle 🌦️",
-                        61: "Light rain 🌧️", 63: "Rain 🌧️", 65: "Heavy rain 🌧️",
-                        71: "Light snow ❄️", 73: "Snow ❄️", 75: "Heavy snow ❄️",
-                        95: "Thunderstorm ⛈️", 99: "Thunderstorm with hail ⛈️",
+                        0: "Clear sky ", 1: "Mainly clear ", 2: "Partly cloudy ", 3: "Overcast ",
+                        45: "Foggy ", 48: "Icy fog ", 51: "Light drizzle ", 53: "Drizzle ",
+                        61: "Light rain ", 63: "Rain ", 65: "Heavy rain ",
+                        71: "Light snow ", 73: "Snow ", 75: "Heavy snow ",
+                        95: "Thunderstorm ", 99: "Thunderstorm with hail ",
                     };
                     const condition = codeMap[w.weathercode] ?? "Unknown";
                     const windDir = (deg: number) => {
@@ -99,7 +96,7 @@ class APICommands extends CommandHandler {
                         return dirs[Math.round(deg / 45) % 8];
                     };
 
-                    header(`Weather in ${name}, ${country} 🌍`);
+                    header(`Weather in ${name}, ${country} `);
                     label("Condition", condition);
                     label("Temperature", `${w.temperature}°C`);
                     label("Wind Speed", `${w.windspeed} km/h ${windDir(w.winddirection)}`);
@@ -110,7 +107,7 @@ class APICommands extends CommandHandler {
                 }
             });
 
-        // ── 4. GITHUB ───────────────────────────────────────
+
         program
             .command("github <username>")
             .description("Fetch a GitHub user's public profile info (GitHub REST API)")
@@ -122,7 +119,7 @@ class APICommands extends CommandHandler {
                     });
                     spinner.stop();
                     const u = res.data;
-                    header(`GitHub Profile: @${u.login} 🐙`);
+                    header(`GitHub Profile: @${u.login}`);
                     label("Name", u.name ?? "N/A");
                     label("Bio", u.bio ?? "N/A");
                     label("Location", u.location ?? "N/A");
@@ -143,7 +140,7 @@ class APICommands extends CommandHandler {
                 }
             });
 
-        // ── 5. CRYPTO ───────────────────────────────────────
+
         program
             .command("crypto <coin>")
             .description("Get live price & market data for a cryptocurrency (CoinGecko API)")
@@ -167,7 +164,7 @@ class APICommands extends CommandHandler {
                     }
                     const change = data.usd_24h_change?.toFixed(2);
                     const changeColor = parseFloat(change) >= 0 ? chalk.greenBright : chalk.redBright;
-                    header(`${coin.toUpperCase()} Price 📈`);
+                    header(`${coin.toUpperCase()} Price`);
                     label("Price (USD)", `$${data.usd.toLocaleString()}`);
                     label("Market Cap", `$${data.usd_market_cap?.toLocaleString() ?? "N/A"}`);
                     label("24h Volume", `$${data.usd_24h_vol?.toLocaleString() ?? "N/A"}`);

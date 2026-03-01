@@ -1,19 +1,17 @@
 import chalk from "chalk";
 
-/**
- * Shared display helpers for consistent, colored CLI output.
- */
+
 
 export function success(msg: string): void {
-    console.log(chalk.green("✔ ") + chalk.greenBright(msg));
+    console.log(chalk.green("[ok] ") + chalk.greenBright(msg));
 }
 
 export function error(msg: string): void {
-    console.error(chalk.red("✖ ") + chalk.redBright(msg));
+    console.error(chalk.red("[err] ") + chalk.redBright(msg));
 }
 
 export function info(msg: string): void {
-    console.log(chalk.cyan("ℹ ") + chalk.cyanBright(msg));
+    console.log(chalk.cyan("[i] ") + chalk.cyanBright(msg));
 }
 
 export function label(key: string, value: string | number): void {
@@ -29,5 +27,5 @@ export function divider(): void {
 }
 
 export function warn(msg: string): void {
-    console.log(chalk.yellow("⚠ ") + chalk.yellowBright(msg));
+    console.log(chalk.yellow("[!] ") + chalk.yellowBright(msg));
 }
